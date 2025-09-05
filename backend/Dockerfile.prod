@@ -1,0 +1,26 @@
+# ---- Builder ----
+FROM node:20.11.1-alpine AS builder
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm install --legacy-peer-deps
+
+COPY . .
+RUN npm run build
+
+# ---- Production ----
+FROM node:20.11.1-alpine
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm install --omit=dev --legacy-peer-deps
+
+# Copy dist + prisma schema + migrations
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/prisma ./prisma
+
+# Generate Prisma client
+RUN npx prisma generate --schema=./prisma/schema.prisma
+
+EXPOSE 3333
+CMD ["npm", "run", "start:migrate:prod"]

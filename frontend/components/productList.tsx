@@ -17,7 +17,7 @@ export default function ProductList() {
   const [products, setProducts] = useState<Product[]>([]);
  
   useEffect(() => {
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsImVtYWlsIjoiYkBiLmJiIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzU2ODg0MjE1LCJleHAiOjE3NTY4ODc4MTV9.KNKN6IrwTPpkQUMdYhEibnowePboMjAgLPbsmU18gKI';
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsImVtYWlsIjoiZEBkLmRkIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzU3MDYyNTgwLCJleHAiOjE3NTcwNjYxODB9.cSrtBQ7rCt54QxLoJrx-JoDCq6XasJbawolrBLPlMXE';
     fetch('/api/product', {
       headers: {
         Authorization: `Bearer ${token}`,
